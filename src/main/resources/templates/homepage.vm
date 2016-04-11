@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Bootstrap -->
+    <link href="css/cosmo.css" rel="stylesheet">
+</head>
+<body>
+
+<a style="float: right" href="/logout">Hadi Hoscakal Bay Bay</a>
+<h1>DoPua v1.0</h1>
+
+<div class="alert alert-dismissible alert-warning">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4>Gunun notu !</h4>
+
+    <p>Dopua ver, gerekce ver, kisi sec, gom gitsin. Vatana millete hayirli olsun. <a
+            href="https://www.youtube.com/watch?v=eMjlAWcap5k">YAPTIM OLDUUU !</a></p>
+</div>
+
+<div style="width: 100%; display:flex">
+    <div style="width: 50%">
+
+        <h2>Gib Dopua</h2>
+
+        <form action="/point" method="post" class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label for="amount" class="col-lg-2 control-label">Kac dopua ?</label>
+
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" name="amount" id="amount" placeholder="1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reason" class="col-lg-2 control-label">Neden amenko ?</label>
+
+                    <div class="col-lg-10">
+                        <textarea class="form-control" placeholder="Egeye kufretti" rows="3" name="reason"
+                                  id="reason"></textarea>
+                        <span class="help-block">Dopua verme sebebi yazma kutusu, bokunu cikarma</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rewardedId" class="col-lg-2 control-label">Scum kisisi</label>
+
+                    <div class="col-lg-10">
+                        <select class="form-control" name="rewardedId" id="rewardedId">
+                            #foreach($scum in $scumList)
+                                <option value="$scum.getId()">$scum.getUsername()</option>
+                            #end
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-lg-10 col-lg-offset-2">
+                        <button type="submit" class="btn btn-primary">Verdim gitti</button>
+                        <button type="reset" class="btn btn-default">Olmadi bastan</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    <div style="width: 5%"></div>
+    <div style="width: 45%">
+
+        <h2>Son kulvarlar</h2>
+        <table class="table table-striped table-hover ">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Scum kisisi</th>
+                <th>Dopualar</th>
+            </tr>
+            </thead>
+            <tbody>
+                #set($begin=0)
+                #foreach($scum in $scumList)
+                <tr>
+                    #set($begin=$begin+1)
+                    <td>$begin</td>
+                    <td>$scum.getUsername()</td>
+                    <td>$scum.getTotalDopuaRecieved()</td>
+                </tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<h2>Bazi Olaylar</h2>
+#foreach($history in $historyList)
+<blockquote>
+    <p>$history.getReason()</p>
+    <small>$history.getAwarderUsername() to $history.getRewardedUsername()
+        <cite title="Source Title"></br>$history.getAmount() DoPua</cite></small>
+</blockquote>
+#end
+
+</body>
+</html>
